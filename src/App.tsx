@@ -4,10 +4,11 @@ import Navbar from "./components/Navbar/Navbar";
 
 function App() {
   return (
+    <>
     <Grid
       templateAreas={{ base: `"nav" "main"`, lg: `"nav nav" "aside main"` }}
     >
-       {/* show how our page is gonna be layout */}
+       {/* templateAreas: show how our page is gonna be layout */}
       <GridItem area="nav">
         <Navbar />
       </GridItem>
@@ -17,9 +18,12 @@ function App() {
         </GridItem>
       </Show>
       <GridItem area={"main"}>
-        Main
+      <GameGrid/>
       </GridItem>
     </Grid>
+    
+    </>
+    
   );
 }
 
