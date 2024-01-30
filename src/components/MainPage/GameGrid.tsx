@@ -3,6 +3,7 @@ import { SimpleGrid, Text, transform } from "@chakra-ui/react";
 import GameCard from "./GameCard";
 function GameGrid() {
   const { games, error } = useGame();
+  
   return (
     <>
       {error && <Text>{error}</Text>}
