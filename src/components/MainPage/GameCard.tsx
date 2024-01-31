@@ -8,7 +8,7 @@ interface Props {
 }
 const GameCard = ({game}: Props) => {
   return (
-    <Card width={'300px'} borderRadius={'10px'} overflow={'hidden'} transition={'.4s'} cursor={'pointer'} _hover={{transform: 'scale(1.03)'}}>
+    <Card  transition={'.4s'} cursor={'pointer'} _hover={{transform: 'scale(1.03)'}}>
         <Image src={getCroppedImageUrl(game.background_image)}/>
         <CardBody>
             <Heading fontSize={'2xl'}>{game.name}</Heading>
