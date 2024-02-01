@@ -1,36 +1,26 @@
 import apiClient, { CanceledError } from "../services/apiClient"
 import { useEffect, useState } from "react"
 
-export interface Platform {
+interface Genre {
     id: number;
     name: string;
-    slug: string
+}
+interface FetchGenreData {
+    count: number;
+    results: Genre[]
 }
 
-export interface Game {
-    id: number,
-    name: string
-    background_image: string;
-    parent_platforms: {platform: Platform}[];
-    metacritic: number
-
-}
-interface FetchGameData {
-    count: number,
-    results: Game[]
-}
-
-const useGame = () => {
-        const [games, setGames] = useState<Game[]>([]);
+const useGenres = () => {
+        const [genres, setGenres] = useState<Genre[]>([]);
         const [error, setError] = useState('');
         const [isLoading, setLoading] = useState(false)
 
     useEffect(()=>{
         const controller = new AbortController();
         setLoading(true)
-        apiClient.get<FetchGameData>('/games', {signal: controller.signal})
+        apiClient.get<FetchGenreData>('/genres', {signal: controller.signal})
             .then(res => {
-                setGames(res.data.results);
+                setGenres(res.data.results);
                 setLoading(false);
                 console.log(res.data.results);
             })
@@ -41,9 +31,9 @@ const useGame = () => {
             })
         return () => controller.abort();        
     }, []);
-    return {games, error, isLoading};
+    return {genres, error, isLoading};
 
     
 }
 
-export default useGame
+export default useGenres
