@@ -6,25 +6,28 @@ import GenreList from "./components/Aside/GenreList";
 function App() {
   return (
     <>
-    <Grid
-      templateAreas={{ base: `"nav" "main"`, lg: `"nav nav" "aside main"` }}
-    >
-       {/* templateAreas: show how our page is gonna be layout */}
-      <GridItem area="nav">
-        <Navbar />
-      </GridItem>
-      <Show above="lg">
-        <GridItem area="aside">
-          <GenreList/>
+      <Grid
+        templateAreas={{ base: `"nav" "main"`, lg: `"nav nav" "aside main"` }}
+        templateColumns={{
+          // this also effective in displaying skeleton as it fixed width
+          base: "1fr",
+          lg: "200px 1fr",
+        }}
+      >
+        {/* templateAreas: show how our page is gonna be layout */}
+        <GridItem area="nav">
+          <Navbar />
         </GridItem>
-      </Show>
-      <GridItem area={"main"}>
-      <GameGrid/>
-      </GridItem>
-    </Grid>
-    
+        <Show above="lg">
+          <GridItem area="aside" paddingX={5} width={"240px"}>
+            <GenreList />
+          </GridItem>
+        </Show>
+        <GridItem area={"main"}>
+          <GameGrid />
+        </GridItem>
+      </Grid>
     </>
-    
   );
 }
 
