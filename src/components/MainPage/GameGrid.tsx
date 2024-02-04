@@ -5,6 +5,7 @@ import GameCardSkeleton from "./GameCardSkeleton";
 import GameCardContainer from "./GameCardContainer";
 import { Genre } from "../hooks/useGenre";
 
+// this prop is for getting selected genre from app component that passed by genreList component, so it could be genre type or null
 interface Props {
   selectedGenre: Genre | null;
 }

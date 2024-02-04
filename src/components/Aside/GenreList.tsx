@@ -2,12 +2,13 @@ import { Button, HStack, Image, List, ListItem, Spinner } from "@chakra-ui/react
 import useGenres, { Genre } from "../hooks/useGenre";
 import getCroppedImageUrl from "../services/image-url";
 
-//for sharing state with gameGrid component
+//to notify the parent or the consumer of this component that genre has been selected
 interface Props {
   onSelectGenre: (genre: Genre) => void;
+  selectedGenre: Genre | null;
 }
 
-const GenreList = ({onSelectGenre}: Props) => {
+const GenreList = ({onSelectGenre, selectedGenre}: Props) => {
   // const {data} = useData<Genre>('/genres'); //bad practice: neeed to avoid component about knowing the endpoint
   const { data, isLoading, error } = useGenres();
   if (isLoading) return <Spinner />
@@ -20,7 +21,7 @@ const GenreList = ({onSelectGenre}: Props) => {
         <ListItem key={genre.id} paddingY={'5px'}>
           <HStack>
             <Image src={getCroppedImageUrl(genre.image_background)} boxSize={'32px'} borderRadius={8}/>
-            <Button onClick={() => onSelectGenre(genre)} variant={'link'} fontSize={'lg '}>{genre.name}</Button>
+            <Button fontWeight={genre.id === selectedGenre?.id ? 'bold' : 'normal'} onClick={() => onSelectGenre(genre)} variant={'link'} fontSize={'lg '}>{genre.name}</Button>
           </HStack>
         </ListItem>
       ))}
