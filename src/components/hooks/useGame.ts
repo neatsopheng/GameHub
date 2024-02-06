@@ -19,10 +19,12 @@ const useGame = (
   gameQuery: GameQuery
 ) =>
   useData<Game>("/games", { 
+    // ur provided name of params must be matched to api given name to make server response correctly
     params: { 
         genres: gameQuery.genre?.id,
         platforms: gameQuery.platform?.id,
-        ordering: gameQuery.sortOrder
+        ordering: gameQuery.sortOrder,
+        search: gameQuery.searchText
     } }, [gameQuery]);
 
 export default useGame;
