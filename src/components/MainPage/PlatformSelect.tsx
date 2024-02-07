@@ -11,6 +11,7 @@ interface Props {
 const PlatformSelect = ({onSelectPlatform, selectedPlatform}:Props) => {
     const {data, error} = usePlatform();
     if (error) return null;
+
   return (
     <Menu>
         <MenuButton as={Button} rightIcon={<BsChevronDown/>}>{selectedPlatform?.name || 'Platform'}</MenuButton>

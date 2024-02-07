@@ -7,6 +7,7 @@ import { Genre } from "./components/hooks/useGenre";
 import { Platform } from "./components/hooks/useGame";
 import PlatformSelect from "./components/MainPage/PlatformSelect";
 import SortSelector from "./components/MainPage/SortSelector";
+import GameHeading from "./components/MainPage/GameHeading";
 export interface GameQuery {
   genre: Genre | null;
   platform: Platform | null;
@@ -16,9 +17,6 @@ export interface GameQuery {
 
 function App() {
   const [gameQuery, setGameQuery] = useState<GameQuery>({} as GameQuery);
-  const [showSelected, setShowSelected] = useState<GameQuery>({} as GameQuery);
-  
-  console.log(showSelected.genre?.name);
 
   return (
     <>
@@ -33,7 +31,6 @@ function App() {
         {/* templateAreas: show how our page is gonna be layout */}
         <GridItem area="nav">
           <Navbar onSearch={(searchText) => setGameQuery({...gameQuery, searchText})}/>
-        <p>{showSelected.genre?.name}</p>
           
         </GridItem>
         <Show above="lg">
@@ -46,9 +43,10 @@ function App() {
         </Show>
 
         <GridItem area={"main"}>
-          <Flex  paddingLeft={2} marginBottom={5}>
+          <GameHeading gameQuery={gameQuery}/>
+          <Flex marginBottom={5}>
             <Box marginRight={5}>
-              <PlatformSelect onSelectPlatform={(platform) => {setGameQuery({...gameQuery, platform}); setShowSelected(gameQuery)}} selectedPlatform={gameQuery.platform}/>
+              <PlatformSelect onSelectPlatform={(platform) => {setGameQuery({...gameQuery, platform})}} selectedPlatform={gameQuery.platform}/>
             </Box>
             <SortSelector sortOrder={gameQuery.sortOrder} onSelectedSort={(sortOrder) => setGameQuery({...gameQuery, sortOrder})}/>
           </Flex>
