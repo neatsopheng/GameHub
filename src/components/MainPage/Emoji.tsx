@@ -1,6 +1,6 @@
-import meh from '../../assets/meh.png';
-import bullEye from '../../assets/bull_eyes.jpg';
-import thumbUp from '../../assets/thumb_up.jpg';
+import meh from '../../assets/meh-removebg-preview.png';
+import bullEye from '../../assets/bull_eyes-removebg-preview.png';
+import thumbUp from '../../assets/thumb_up-removebg-preview.png';
 import { Image, ImageProps } from '@chakra-ui/react';
 
 interface Props {
