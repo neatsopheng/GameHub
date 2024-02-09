@@ -1,4 +1,4 @@
-import { Box, Flex, Grid, GridItem, Show } from "@chakra-ui/react";
+import {  Button, Flex, Grid, GridItem, Menu, MenuButton, MenuList, Show } from "@chakra-ui/react";
 import GameGrid from "./components/MainPage/GameGrid";
 import Navbar from "./components/Navbar/Navbar";
 import GenreList from "./components/Aside/GenreList";
@@ -8,6 +8,8 @@ import { Platform } from "./components/hooks/useGame";
 import PlatformSelect from "./components/MainPage/PlatformSelect";
 import SortSelector from "./components/MainPage/SortSelector";
 import GameHeading from "./components/MainPage/GameHeading";
+import GenreDropdown from "./components/Aside/GenreDropdown";
+import { BsChevronDown } from "react-icons/bs";
 export interface GameQuery {
   genre: Genre | null;
   platform: Platform | null;
@@ -42,14 +44,43 @@ function App() {
           </GridItem>
         </Show>
 
+        
+
         <GridItem area={"main"}>
+          <Show below="lg">
+            <Flex justifyContent={'right'} marginX={2}>
+              <Menu>
+                      <MenuButton as={Button}
+               aria-label="Options"
+               variant={'outline'}
+               rightIcon={<BsChevronDown />}
+                      >
+              Filter
+                      </MenuButton>
+                      <MenuList>
+                <Flex flexDirection={'column'}>
+              
+                    <GenreDropdown selectedGenre={gameQuery.genre}
+                      onSelectGenre={(genre) => setGameQuery({...gameQuery, genre})}/>
+                    <PlatformSelect onSelectPlatform={(platform) => {setGameQuery({...gameQuery, platform})}} selectedPlatform={gameQuery.platform}/>
+                  <SortSelector sortOrder={gameQuery.sortOrder} onSelectedSort={(sortOrder) => setGameQuery({...gameQuery, sortOrder})}/>
+                </Flex>
+                      </MenuList>
+                  </Menu>
+            </Flex>
+          </Show>
           <GameHeading gameQuery={gameQuery}/>
-          <Flex marginBottom={5}>
-            <Box marginRight={5}>
-              <PlatformSelect onSelectPlatform={(platform) => {setGameQuery({...gameQuery, platform})}} selectedPlatform={gameQuery.platform}/>
-            </Box>
-            <SortSelector sortOrder={gameQuery.sortOrder} onSelectedSort={(sortOrder) => setGameQuery({...gameQuery, sortOrder})}/>
-          </Flex>
+
+          <Show above="lg">
+            <Flex  marginBottom={5} marginLeft={3} flexWrap={'wrap'} gap={5}>
+              {/* <Show below="lg">
+                <GenreDropdown selectedGenre={gameQuery.genre}
+                onSelectGenre={(genre) => setGameQuery({...gameQuery, genre})}/>
+              </Show> */}
+                <PlatformSelect onSelectPlatform={(platform) => {setGameQuery({...gameQuery, platform})}} selectedPlatform={gameQuery.platform}/>
+              <SortSelector sortOrder={gameQuery.sortOrder} onSelectedSort={(sortOrder) => setGameQuery({...gameQuery, sortOrder})}/>
+            </Flex>
+          </Show>
           <GameGrid
             gameQuery={gameQuery}
           />
